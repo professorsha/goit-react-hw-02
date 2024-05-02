@@ -1,6 +1,7 @@
 import css from './App.module.css';
 import { useState } from 'react';
 import Description from '../Description/Description';
+import Notification from '../Notification/Notification';
 import Feedback from '../Feedback/Feedback';
 import Options from '../Options/Options';
 
@@ -11,12 +12,18 @@ export default function App() {
     bad: 0,
   });
   const updateFeedback = feedbackType => {
-    console.log(feedbackType);
-    setClicks({ ...clicks, [feedbackType]:clicks[feedbackType] + 1 });
-    console.log(clicks);
+    // console.log(feedbackType);
+    setClicks({ ...clicks, [feedbackType]: clicks[feedbackType] + 1 });
+    // console.log(clicks);
     // Тут використовуй сеттер, щоб оновити стан
   };
-  
+  const totalFeedback = clicks.good + clicks.neutral + clicks.bad;
+  // console.log(totalFeedback);
+  // const [isVisible, setIsVisible] = useState(false);
+
+  // const handleToggle = () => {
+  //   setIsVisible(!isVisible);
+  // };
   // const handleClickGood = () => {
   //   setClicks({...clicks,
   //     good:clicks.good + 1,});
@@ -34,19 +41,24 @@ export default function App() {
     <div className={css.container}>
       <Description />
       <div className={css.containerButton}>
-        <Options value={clicks.good} onCount={()=>updateFeedback("good")}>
+        <Options value={clicks.good} onCount={() => updateFeedback('good')}>
           Good
         </Options>
-        <Options value={clicks.neutral} onCount={()=>updateFeedback("neutral")}>
+        <Options
+          value={clicks.neutral}
+          onCount={() => updateFeedback('neutral')}
+        >
           Neutral
         </Options>
-        <Options value={clicks.bad} onCount={()=>updateFeedback("bad")}>
+        <Options value={clicks.bad} onCount={() => updateFeedback('bad')}>
           Bad
         </Options>
         <Options onCount={handleReset}>Reset</Options>
       </div>
-
-      <Feedback good={clicks.good} neutral={clicks.neutral} bad={clicks.bad} />
+      {(totalFeedback===0)&&(<Notification></Notification>)}
+      {(totalFeedback>0)&& (<Feedback good={clicks.good} neutral={clicks.neutral} bad={clicks.bad} total={totalFeedback}/>)}
+      
+      
     </div>
   );
 }
