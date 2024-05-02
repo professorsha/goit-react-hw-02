@@ -1,0 +1,13 @@
+.container{
+  margin: 0 auto;
+  width: 1480px;
+  text-align: center;
+}
+.containerButton{
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+  margin: 0 auto;
+  width: 400px;
+  /* text-align: center; */
+}
