@@ -1,5 +1,8 @@
 .button{
     border-radius: 3px;
-    border:2px solid red;
-    background-color: gainsboro;
+    border:2px solid #6b6969;
+    background-color: #a8a8a8;
+}
+.button:hover{
+    background-color: #808080;
 }
