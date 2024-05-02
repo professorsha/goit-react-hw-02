@@ -53,7 +53,7 @@ export default function App() {
         <Options value={clicks.bad} onCount={() => updateFeedback('bad')}>
           Bad
         </Options>
-        <Options onCount={handleReset}>Reset</Options>
+        {(totalFeedback>0)&& (<Options onCount={handleReset}>Reset</Options>)}
       </div>
       {(totalFeedback===0)&&(<Notification></Notification>)}
       {(totalFeedback>0)&& (<Feedback good={clicks.good} neutral={clicks.neutral} bad={clicks.bad} total={totalFeedback}/>)}
