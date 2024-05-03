@@ -20,10 +20,10 @@ export default function App() {
   const updateFeedback = feedbackType => {
     setClicks({ ...clicks, [feedbackType]: clicks[feedbackType] + 1 });
   };
-
   const handleReset = () => {
     setClicks({ good: 0, neutral: 0, bad: 0 });
   };
+
   const totalFeedback = clicks.good + clicks.neutral + clicks.bad;
   const positiveFeedback = Math.round((clicks.good / totalFeedback) * 100);
 
@@ -31,19 +31,11 @@ export default function App() {
     <div className={css.container}>
       <Description />
       <div className={css.containerButton}>
-        <Options value={clicks.good} onCount={() => updateFeedback('good')}>
-          Good
-        </Options>
         <Options
-          value={clicks.neutral}
-          onCount={() => updateFeedback('neutral')}
-        >
-          Neutral
-        </Options>
-        <Options value={clicks.bad} onCount={() => updateFeedback('bad')}>
-          Bad
-        </Options>
-        {totalFeedback > 0 && <Options onCount={handleReset}>Reset</Options>}
+          reset={handleReset}
+          total={totalFeedback}
+          onCount={updateFeedback}
+        />
       </div>
       {totalFeedback === 0 && <Notification></Notification>}
       {totalFeedback > 0 && (
